@@ -1,0 +1,64 @@
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.contact-info p {
+  margin-bottom: 0.5rem;
+}
+
+.bi {
+  margin-right: 0.5rem;
+}
+
+.modal {
+  display: none; /* El modal estará oculto por defecto */
+  position: fixed; /* Posición fija para que no se mueva con el scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* Fondo semitransparente para destacar el modal */
+  z-index: 1; /* Colocar el modal por encima del resto del contenido */
+}
+
+.modal-content {
+  background-color: red;
+  margin: 15% auto; /* Centrar vertical y horizontalmente */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px; /* Ancho máximo del modal */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-transparent .modal-content {
+        background-color: rgba(255, 255, 255, 0.5); /* Cambia la opacidad aquí */
+    }
+    
+.btn-custom {
+    background-color: transparent; /* Fondo transparente */
+    /*border-color: #your_custom_color; /* Cambia "#your_custom_color" por el color que desees para el borde */
+    /*color: #your_text_color; /* Cambia "#your_text_color" por el color que desees para el texto */
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo al pasar el mouse (puede ajustarse la opacidad) */
+    /*border-color: #your_hover_color; /* Cambia "#your_hover_color" por el color de borde que desees al pasar el mouse */
+    /*color: #your_hover_text_color; /* Cambia "#your_hover_text_color" por el color de texto al pasar el mouse */
+}
