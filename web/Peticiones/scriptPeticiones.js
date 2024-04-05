@@ -1,7 +1,7 @@
 
 localStorage.setItem("idUsuario", 2);
 function mostrarPeticiones() {
-    
+
     console.log("Antes de consumir servicio para obtener peticiones");
     let url = 'http://localhost:8080/QualityMultiservices/api/administrarPeticion/obtenerPeticiones?idUsuario=';
     let idUsuario = localStorage.getItem("idUsuario");
@@ -19,8 +19,8 @@ function mostrarPeticiones() {
 
                 console.log(data);
                 for (let i = 0; i < data.length; i++) {
-                    localStorage.setItem("peticion"+i, JSON.stringify(data[i]));
-                    
+                    localStorage.setItem("peticion" + i, JSON.stringify(data[i]));
+
                     let idPeticion = data[i].idPeticion;
                     let nombreUsuario = data[i].publicacion.usuario.nombreUsuario;
                     let oficioBuscado = data[i].oficioBuscado.nombreOficio;
@@ -77,11 +77,27 @@ function mostrarPeticion(posicionPeticionSel) {
 
     let oficio = document.getElementById("txtOficio");
     let descripcion = document.getElementById("txtDescripcion");
-    
+
     oficio.value = peticionObjeto.oficioBuscado.nombreOficio;
     descripcion.value = peticionObjeto.publicacion.descripcion;
-} 
+}
 
-function eliminarPeticion(posicionPeticionSel){
-    
+function eliminarPeticion(posicionPeticionSel) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    }); 
 }
