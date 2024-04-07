@@ -16,7 +16,6 @@ import jakarta.ws.rs.QueryParam;
 import org.utl.dsm.Controller.ControllerPeticion;
 import org.utl.dsm.Model.FotoPublicacion;
 import org.utl.dsm.Model.Peticion;
-import org.utl.dsm.Model.Publicacion;
 
 @Path("administrarPeticion")
 public class RestPeticion extends Application {

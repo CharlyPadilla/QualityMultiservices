@@ -10,6 +10,7 @@ import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.utl.dsm.Controller.ControllerCliente;
@@ -25,7 +26,7 @@ public class RestCliente {
     @Path("updateCliente")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@FormParam("datosCliente") @DefaultValue("{}") String datosCliente) {
+    public Response update(@QueryParam("datosCliente") @DefaultValue("{}") String datosCliente) {
         String out;
         System.out.println("Datos cliente: " + datosCliente);
         ControllerCliente cc = new ControllerCliente();
