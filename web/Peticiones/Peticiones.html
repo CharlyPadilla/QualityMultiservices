@@ -40,7 +40,16 @@
             </div>
         </nav>
 
+        <button type="button" class="btn btn-outline-primary m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+            Crear publicación
+        </button>
+
         <div id="tarjetasPeticion">
+            
             <div class="container mt-4">
                 <div class="card">
                     <div class="card-body">
@@ -60,9 +69,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-end">
-                        <button class="btn btn-primary me-2"><i class="bi bi-pencil-square"></i> Editar</button>
-                        <button class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</button>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -80,7 +95,7 @@
                         <ul class="list-group">
                             <li class="list-group-item"><strong>Oficio:</strong> <input type="text" id="txtOficio">...</li>
                             <li class="list-group-item"><strong>Foto:</strong> <input type="file" id="imgFoto">...</li>                           
-                               
+
                             <li class="list-group-item"><strong>Descripción:</strong><br> <span id="txtDescripcion">...</span></li>
                         </ul>
                     </div>
@@ -100,7 +115,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </body>
-    
+
 </html>
 
 

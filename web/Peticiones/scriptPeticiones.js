@@ -1,4 +1,5 @@
 
+
 localStorage.setItem("idUsuario", 2);
 function mostrarPeticiones() {
 
@@ -42,6 +43,24 @@ function mostrarPeticiones() {
                     
                                     <div class="col-md-10 col-sm-9">
                                         <h5 class="card-title" >${nombreUsuario}</h5>
+                    
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Dropdown button
+                                            </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                         </ul>
+                                     </div>
+                    
+                                <div class="collapse multi-collapse row" id="multiCollapsePeticion">
+                                    <button onclick="mostrarPeticion(${i})" data-bs-toggle="modal" data-bs-target="#modalPeticion"  fill="currentColor" class=" m-1 bi bi-pencil-square btn btn-dark" >Editar </button>                    
+                                    <button onclick=confirmarEliminarPeticion(${i}) class="bi bi-trash m-1 btn btn-danger" style="color: black;")>Eliminar</button>
+                                </div>
+                            </div>
+                    
                                         <h6 class="card-subtitle mb-2 text-muted">${oficioBuscado}</h6>
                                         <p class="card-text">${descripcion}</p>
                                         
@@ -55,10 +74,7 @@ function mostrarPeticiones() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-end">
-                               <button> <i onclick=mostrarPeticion(${i}) data-bs-toggle="modal" data-bs-target="#modalTicket" class="bi bi-pencil-square" style="font-size: 2rem; color: cornflowerblue;")>EDITAR</i></button>
-                                <button> <i onclick=eliminarPeticion(${i}) data-bs-toggle="modal" data-bs-target="#modalTicket" class="bi bi-trash" style="font-size: 2rem; color: cornflowerblue;")>ELIMINAR</i></button>
-                            </div>
+                            
                          </div>
                     </div>
                     `;
@@ -82,22 +98,26 @@ function mostrarPeticion(posicionPeticionSel) {
     descripcion.value = peticionObjeto.publicacion.descripcion;
 }
 
-function eliminarPeticion(posicionPeticionSel) {
+function confirmarEliminarPeticion(posicionPeticionSel) {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "¿Estás segur@ de eliminar la publicación?",
+        text: "Esto ya no se podrá revertir!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Si, eliminar!"
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
+                title: "Hecho!",
+                text: "La publicación ha sido eliminada",
                 icon: "success"
             });
         }
-    }); 
+    });
+}
+
+function eliminarPeticion(posicionPeticionSel) {
+
 }
