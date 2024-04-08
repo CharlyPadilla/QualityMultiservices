@@ -24,7 +24,7 @@ public class ConnectioDB {
         }
     }
     
-    public void close(){
+    public void close(Connection conn1){
         if(conn == null){
             try{
                 conn.close();
