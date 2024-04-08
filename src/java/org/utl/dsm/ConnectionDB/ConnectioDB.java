@@ -11,7 +11,7 @@ public class ConnectioDB {
         
         String user = "root";
         String password = "2024865Ss";
-        String url = "jdbc:mysql://127.0.0.1:3306/QualityMultiservices";
+        String url = "jdbc:mysql://127.0.0.1:3306/qualityMultiservices";
         String params = "?useSSL=false&useUnicode=true&characterEnconding=utf-8";
         
         try{
