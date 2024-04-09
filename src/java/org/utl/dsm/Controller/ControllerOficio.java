@@ -36,6 +36,7 @@ public class ControllerOficio {
         }
         connMySQL.close(conn);
         conn.close();
+        connMySQL.close(conn);
         return listaOficios;
     }
 }

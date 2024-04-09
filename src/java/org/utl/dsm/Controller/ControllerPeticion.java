@@ -224,6 +224,35 @@ public class ControllerPeticion {
         conn.close();
         connMySQL.close(conn);
         return listaFotosPeticion;
-    
     }  
+    
+    public boolean validarToken(String token) {
+         boolean resul;
+            String query = "SELECT * FROM usuario WHERE token = ?";
+        try {
+            ConnectioDB connMySQL = new ConnectioDB();
+            java.sql.Connection conn = connMySQL.open();
+            PreparedStatement ejecutor = conn.prepareStatement(query);
+
+            ejecutor.setString(1, token);
+           
+            // Ejecutamos la consulta
+            ResultSet resultado = ejecutor.executeQuery();
+         
+            if (resultado.next()){
+                resul = true;
+            }else {
+                resul = false;
+            }
+
+            ejecutor.close();
+            conn.close();
+            connMySQL.close(conn);
+            return resul;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
