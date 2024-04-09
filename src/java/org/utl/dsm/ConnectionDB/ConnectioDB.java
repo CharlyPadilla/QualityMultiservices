@@ -1,4 +1,4 @@
-
+    
 package org.utl.dsm.ConnectionDB;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ public class ConnectioDB {
     public Connection open(){
         
         String user = "root";
-        String password = "Root";
+        String password = "2024865Ss";
         String url = "jdbc:mysql://127.0.0.1:3306/qualityMultiservices";
         String params = "?useSSL=false&useUnicode=true&characterEnconding=utf-8";
         
@@ -24,7 +24,7 @@ public class ConnectioDB {
         }
     }
     
-    public void close(){
+    public void close(Connection conn1){
         if(conn == null){
             try{
                 conn.close();
