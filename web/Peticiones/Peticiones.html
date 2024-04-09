@@ -28,7 +28,59 @@
         </button>
 
         <div id="tarjetasPeticion">
-            <<h2 class="align-content-center justify-content-center text-center">CARGANDO...</h2>
+            <h2 class="align-content-center justify-content-center text-center">CARGANDO...</h2>
+
+
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="m-2">
+                                <div class="col-md-2 col-sm-3">
+                                    <img src="data:image/png;base64,${fotoPerfil}" class="profile-img img-fluid" alt="Avatar">
+                                </div>
+
+                                <div class="col-md-10 col-sm-9">
+                                    <h5 class="card-title" >${nombreUsuario}</h5>
+
+                                    <div class="dropdown position-absolute top-0 end-0 me-3 mt-3">
+                                        <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical dropdown-toggle "></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li onclick=mostrarInfoPeticion(${i}) ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalMostrarPeticion" href="#">Editar</a></li>
+                                            <li><a onclick=confirmarEliminarPeticion(${i}) class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
+                                <div style="margin-left: 5vh">
+                                    <h6 class="card-subtitle mb-2 text-muted"><strong>Oficio buscado: </strong>${oficioBuscado}</h6>
+                                    <p class="card-text>${
+                                        descripcion
+                                    }"></p>
+                                </div>
+                            </div>
+                            <div id="contImagenAMostrar${
+                                    i
+                                }" class="d-flex justify-content-center">
+                                <img height="350" class="rounded shadow m-2" src="data:image/png;base64,${imagen}" id="imgPeticion${
+                                    i
+                                }" alt="imagen${i}">
+                            </div>
+
+                            <h6 class="card-subtitle mb-2 text-muted">Creado:${fechaCreacion}</h6>`;
+                            if (fechaEdicion !== undefined) {
+                            peticionAMostrar += `<br><h6 class="my-1 card-subtitle mb-2 text-muted">Editado:${fechaEdicion}</h6>`;
+                            }
+                            peticionAMostrar += `
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 
@@ -48,7 +100,7 @@
                                 <strong>Foto:</strong>
                                 <div>
                                     <input type="file" id="archivoFotoPeticion">
-                                    
+
                                     <button type="button" class="btn btn-danger " id="btnQuitarImagen">Quitar Imagen</button>
                                 </div>
                             </li>
@@ -78,14 +130,30 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Crear publicación</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    
                     <div class="modal-body">
                         <ul class="list-group">
                             <li class="list-group-item"><strong>Oficio:</strong> <select id="selectOficiosAGuardar"></select></li>
-                            <li class="list-group-item"><strong>Foto:</strong> <input type="file" id="imgFotoAGuardar"></li>                           
-                            <li class="list-group-item"> <img class="rounded shadow ml-auto" id="imgFotoMostrada" style="width: 100vh"></li>                           
-                            <li class="list-group-item"><strong>Descripción:</strong><br> <textarea id=txtDescripcionAGuardar name="name" rows="5" class="w-100" placeholder="Escribe una descripción de tu necesidad..."></textarea></li>
+                            <li class="list-group-item"><strong>Foto:</strong> <input type="file" id="imgFotoAGuardar" multiple></li>                           
+                            <li class="list-group-item">
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner" id="carouselInner">
+                                        <!-- Las imágenes se agregarán aquí dinámicamente -->
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </li>                           
+                            <li class="list-group-item"><strong>Descripción:</strong><br> <textarea id="txtDescripcionAGuardar" name="name" rows="5" class="w-100" placeholder="Escribe una descripción de tu necesidad..."></textarea></li>
                         </ul>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" value="" onclick="guardarPeticion()" id="btnPublicar"  data-bs-dismiss="modal" class="btn btn-primary">Publicar</button>
@@ -93,7 +161,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Sección para insetar footer -->
         <div id="insert_footer"></div>
 

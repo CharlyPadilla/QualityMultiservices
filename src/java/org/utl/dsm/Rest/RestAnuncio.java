@@ -39,7 +39,7 @@ public class RestAnuncio {
                             anuncio.getPublicacion().getDescripcion(), fotoPublicacion.get(0).getCadenaFoto(), anuncio.getOficioOfrecido().getIdOficio());
 
                     out = """
-                     "idAnuncioInsertado": "%s" 
+                          { "idAnuncioInsertado": "%s" }
                      """;
 
                     out = String.format(out, idAnuncioInsertado);
@@ -50,12 +50,12 @@ public class RestAnuncio {
                 System.out.println("Error en la petición");
                 System.out.println(e.getMessage());
                 out = """
-                     "idAnuncioInsertado": "-2" 
+                      { "idAnuncioInsertado": "-2" }
                      """;
             }
         } else {
             out = """
-                     "idAnuncioInsertado": "-4" 
+                  {"idAnuncioInsertado": "-4" }
                      """;
         }
         return Response.ok(out).build();
@@ -79,7 +79,7 @@ public class RestAnuncio {
                 out = gson.toJson(listaAnuncios);
             } else {
                 out = """
-                     "Mensaje": "Error en la consulta el la BADA" 
+                      { "Mensaje": "Error en la consulta el la BADA" }
                      """;
             }
 
@@ -88,7 +88,7 @@ public class RestAnuncio {
             System.out.println("Error en la petición: ");
             System.out.println(e.getMessage());
             out = """
-                     "Mensaje": "Error en la recepción de datos del servicio" 
+                  { "Mensaje": "Error en la recepción de datos del servicio" }
                      """;
         }
         return Response.ok(out).build();
@@ -114,7 +114,7 @@ public class RestAnuncio {
                             anuncio.getPublicacion().getDescripcion(), fotoPublicacion.get(0).getCadenaFoto(), anuncio.getOficioOfrecido().getIdOficio());
 
                     out = """
-                     "idAnuncioActualizado": "%s" 
+                          { "idAnuncioActualizado": "%s" }
                      """;
 
                     out = String.format(out, idAnuncioActualizado);
@@ -125,12 +125,12 @@ public class RestAnuncio {
                 System.out.println("Error en la petición");
                 System.out.println(e.getMessage());
                 out = """
-                     "idAnuncioActualizado": "-2" 
+                      { "idAnuncioActualizado": "-2" }
                      """;
             }
         } else {
             out = """
-                     "idAnuncioInsertado": "-4" 
+                  {"idAnuncioInsertado": "-4" }
                      """;
         }
         return Response.ok(out).build();
@@ -169,7 +169,7 @@ public class RestAnuncio {
             }
         } else {
             out = """
-                     "idAnuncioInsertado": "-4" 
+                  { "idAnuncioInsertado": "-4" }
                      """;
         }
         return Response.ok(out).build();
@@ -189,7 +189,7 @@ public class RestAnuncio {
                 out = gson.toJson(listaAnuncios);
             } else {
                 out = """
-                     "Mensaje": "Error en la consulta el la BADA" 
+                      { "Mensaje": "Error en la consulta el la BADA" }
                      """;
             }
 
@@ -198,7 +198,7 @@ public class RestAnuncio {
             System.out.println("Error en la petición: ");
             System.out.println(e.getMessage());
             out = """
-                     "Mensaje": "Error en la recepción de datos del servicio" 
+                  { "Mensaje": "Error en la recepción de datos del servicio" }
                      """;
         }
         return Response.ok(out).build();

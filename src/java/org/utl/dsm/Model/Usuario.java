@@ -10,6 +10,7 @@ public class Usuario {
     private String contrasenia;
     private Usuario usuarioCliente;
     private int numeroCelular;
+    private String token;
 
     public Usuario(int idUsuario, int numeroCelular, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia, Usuario usuarioCliente) {
         this.idUsuario = idUsuario;
@@ -19,6 +20,18 @@ public class Usuario {
         this.correo = correo;
         this.contrasenia = contrasenia;
         this.numeroCelular = numeroCelular;
+
+        this.usuarioCliente = usuarioCliente;
+    }
+    
+    public Usuario(int idUsuario, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String token) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.imagenPerfil = imagenPerfil;
+        this.ciudad = ciudad;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
+        this.token = token;
 
         this.usuarioCliente = usuarioCliente;
     }
@@ -90,4 +103,13 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    
 }

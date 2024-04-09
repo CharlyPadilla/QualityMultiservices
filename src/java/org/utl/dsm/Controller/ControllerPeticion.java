@@ -28,10 +28,38 @@ public class ControllerPeticion {
             
             ResultSet resultado = ejecutor.executeQuery();
             if (resultado.next()){
-                int idPeticionInsertada = resultado.getInt("idPeticion");
-                System.out.println("id de petición insertada: "+idPeticionInsertada);
-                respuesta = idPeticionInsertada;
+                int idPublicacionInsertada = resultado.getInt("idPublicacion");
+                System.out.println("id de publicacion insertada: "+idPublicacionInsertada);
+                respuesta = idPublicacionInsertada;
             }
+           ejecutor.close();
+        }catch(Exception e){
+            System.out.println("Error al consultar la Bada");
+            System.out.println(e.getMessage());
+            respuesta = -1;
+        }
+        connMySQL.close(conn);
+        conn.close();
+        return respuesta;
+    }
+    
+    
+     public int guardarfotosPeticion(ArrayList<FotoPublicacion> fotos, int idPublicacion) throws SQLException{
+        String insert = "INSERT INTO fotoPublicacion VALUES (0, ?, ?);";
+        ConnectioDB connMySQL = new ConnectioDB();
+        java.sql.Connection conn = connMySQL.open();
+        int respuesta=0;
+        
+        try{
+            CallableStatement ejecutor = (CallableStatement) conn.prepareCall(insert);
+            ResultSet resultado;
+            for(int i=1; i<fotos.size(); i++){
+            ejecutor.setString(1, (fotos.get(i).getCadenaFoto()) );
+            ejecutor.setInt(2, idPublicacion);
+             resultado = ejecutor.executeQuery();
+                System.out.println(resultado);
+            }
+            
            ejecutor.close();
         }catch(Exception e){
             System.out.println("Error al consultar la Bada");
@@ -255,4 +283,43 @@ public class ControllerPeticion {
             return false;
         }
     }
+    
+     public ArrayList<Peticion> obtenerTodasLasPeticiones() throws SQLException {
+        String query = "SELECT * FROM mostrarTodasLasPeticiones";
+        ConnectioDB connMySQL = new ConnectioDB();
+        java.sql.Connection conn = connMySQL.open();
+        ArrayList<Peticion> listaPeticion = new ArrayList<>();
+        ArrayList<FotoPublicacion> listaFotosPeticion = new ArrayList<>();
+        try{
+            PreparedStatement executer = conn.prepareStatement(query);
+            
+            ResultSet result = executer.executeQuery();
+            while(result.next()){
+                Peticion peticion = new Peticion();
+                FotoPublicacion fotosPeticion = new FotoPublicacion();
+                peticion.setIdPeticion(result.getInt("idPeticion"));
+                peticion.getPublicacion().setIdPublicacion(result.getInt("idPublicacion"));
+                peticion.getPublicacion().getUsuario().setNombreUsuario(result.getString("nombreUsuario"));
+                peticion.getPublicacion().setDescripcion(result.getString("descripcionPublicacion"));
+                peticion.getPublicacion().setFechaCreacion(result.getString("fechaCreacion"));
+                peticion.getPublicacion().setFechaEdicion(result.getString("fechaEdicion"));
+                peticion.getOficioBuscado().setNombreOficio(result.getString("nombreOficio"));
+                fotosPeticion.setCadenaFoto(result.getString("fotoPublicacion"));
+                
+                listaFotosPeticion.add(fotosPeticion);
+                peticion.getPublicacion().setListaFotos(listaFotosPeticion);
+                listaPeticion.add(peticion);
+            }
+            
+            executer.close();
+        }catch(Exception e){
+            System.out.println("Fallo al hacer consulta en la BADA (obtenerAnuncios):");
+            System.out.println(e.getMessage());
+            listaFotosPeticion = null;
+        }
+        conn.close();
+        connMySQL.close(conn);
+        return listaPeticion;
+    }
+    
 }

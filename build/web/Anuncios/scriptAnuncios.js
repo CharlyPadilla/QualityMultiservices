@@ -45,7 +45,7 @@ localStorage.setItem("fotoPerfilCadena", "iVBORw0KGgoAAAANSUhEUgAAAPYAAADvCAYAAA
                                             </button>
                                         <ul class="dropdown-menu">
                                             <li onclick=mostrarInfoAnuncio(${i}) ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalMostrarAnuncio" href="#">Editar</a></li>
-                                            <li><a onclick=confirmarEliminaAnuncio(${i}) class="dropdown-item" href="#">Eliminar</a></li>
+                                            <li><a onclick=confirmarEliminarAnuncio(${i}) class="dropdown-item" href="#">Eliminar</a></li>
                                          </ul>
                                      </div>
                     
@@ -95,7 +95,7 @@ mostrarPublicacionesAnuncios();
                 cargarOficios();
                 setTimeout(function () {
                     let selectOficiosAEditar = document.getElementById("selectOficiosParaEditar");
-                    console.log(selectOficiosAEditar.options.length);
+                    //console.log(selectOficiosAEditar.options.length);
                     for (var i = 0; i < selectOficiosAEditar.options.length; i++) {
                 // Comprobar si el valor de la opción actual coincide con el valor que deseas seleccionar
                         if (selectOficiosAEditar.options[i].id === anuncioObjeto.oficioOfrecido.nombreOficio) {
@@ -105,8 +105,9 @@ mostrarPublicacionesAnuncios();
                         }
                     }
                 }, 500); // 500 milisegundos = 0.5 segundos 
-                let input = document.getElementById('btnGuardarAnuncioActualizada');
+                let input = document.getElementById('btnGuardarAnuncioActualizado');
                 input.value = anuncioObjeto.idAnuncio;
+                console.log(anuncioObjeto.idAnuncio);
         }
 
 
@@ -235,6 +236,8 @@ let imgFotoAGuardar = document.getElementById("imgFotoAGuardar");
                 // Leer la imagen como una cadena base64
                 reader.readAsDataURL(imagenSeleccionada);
         });
+        
+        
         function guardarAnuncio() {
 
         let idUsuario = localStorage.getItem("idUsuario");
@@ -259,11 +262,13 @@ let imgFotoAGuardar = document.getElementById("imgFotoAGuardar");
                 };
                 fetch(url, requestOptions).then(
                 function (response) {
+                    console.log(response);
                 return response.json(); // Analiza la respuesta JSON
                 }
         ).then(
                 function (data) {
                 console.log(data);
+                
                         if (!(data.idAnuncioInsertado < 1)) {
                 Swal.fire({
                 icon: "success",
@@ -292,7 +297,7 @@ let imgFotoAGuardar = document.getElementById("imgFotoAGuardar");
 
 
 function actualizarAnuncio() {
-let idAnuncioAActualizar = document.getElementById("btnGuardarAnuncioActualizada").value;
+    let idAnuncioAActualizar = document.getElementById("btnGuardarAnuncioActualizado").value;
         let idUsuario = localStorage.getItem("idUsuario");
         let selectOficios = document.getElementById("selectOficiosParaEditar").value;
         let  descripcion = document.getElementById("txtDescripcionAEditar").value;

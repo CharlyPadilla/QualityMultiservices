@@ -3,7 +3,6 @@ localStorage.setItem("fotoPerfilCadena", "iVBORw0KGgoAAAANSUhEUgAAAPYAAADvCAYAAA
         localStorage.setItem("idUsuario", 2); // Se establecen temporalmente mientras se integra todo el proyecto.
         
         
-        function mostrarPublicacionesPeticiones() {
 cargarBarraNav();
 cargarFooter();
 function cargarBarraNav() {
@@ -13,7 +12,8 @@ function cargarBarraNav() {
             })
             .then(html => {
                 document.getElementById("insert_barraNav").innerHTML = html;
-                cargarTickets();
+                //cargarTickets();
+                mostrarPublicacionesPeticiones();
             });
 };
 
@@ -24,11 +24,11 @@ function cargarFooter() {
             })
             .then(html => {
                 document.getElementById("insert_footer").innerHTML = html;
-                cargarTickets();
+                //cargarTickets();
             });
 };
 
-
+function mostrarPublicacionesPeticiones() {
         console.log("Antes de consumir servicio para obtener peticiones");
                 let url = 'http://localhost:8080/QualityMultiservices_v2/api/administrarPeticion/obtenerPeticiones?idUsuario=';
                 let idUsuario = localStorage.getItem("idUsuario");
@@ -77,11 +77,11 @@ function cargarFooter() {
                               
                             </div>
                     
-                                        <h6 class="card-subtitle mb-2 text-muted"><strong>Oficio buscado: </strong>${oficioBuscado}</h6>
-                                        <p class="card-text">${descripcion}</p>
+                                        <h6 class="card-subtitle mb-2 mx-4 text-muted" style="margin-left: 5vh"><strong>Oficio buscado: </strong>${oficioBuscado}</h6>
+                                        <p class="card-text mx-4" style="">${descripcion}</p>
                                         
                                         <div id="contImagenAMostrar${i}" class="d-flex justify-content-center">
-                                            <img width="300" class="rounded shadow" src="data:image/png;base64,${imagen}" id="imgPeticion${i}" alt="imagen${i}"/>
+                                            <img height="350" class="rounded shadow m-2" src="data:image/png;base64,${imagen}" id="imgPeticion${i}" alt="imagen${i}"/>
                                         </div>
                                         <h6 class="card-subtitle mb-2 text-muted">Creado:${fechaCreacion}</h6>`;
                         if (fechaEdicion !== undefined) {
@@ -102,8 +102,7 @@ function cargarFooter() {
                 }
                 }
         );
-        }
-mostrarPublicacionesPeticiones();
+    }
 
 
 
@@ -205,6 +204,7 @@ let peticionSeleccionada = localStorage.getItem(`peticion${posicionPeticionSel}`
 );
 }
 
+
 function cargarOficios() {
 let url = 'http://localhost:8080/QualityMultiservices_v2/api/administrarOficio/obtenerOficios';
         fetch(url).then(
@@ -214,16 +214,18 @@ let url = 'http://localhost:8080/QualityMultiservices_v2/api/administrarOficio/o
 ).then(
         function (data) {
         document.getElementById("selectOficiosAGuardar").innerHTML = "";
-                for (let i = 0; i < data.length; i++) {
-        let oficio = data[i].nombreOficio;
+        document.getElementById("selectOficiosParaEditar").innerHTML = "";
+        
+            for (let i = 0; i < data.length; i++) {
+                let oficio = data[i].nombreOficio;
                 let idOficio = data[i].idOficio;
                 let oficioAInsertar = `
-                                                <option id=${oficio} value="${idOficio}">${oficio}</option>`;
+                                       <option id=${oficio} value="${idOficio}">${oficio}</option>`;
                 document.getElementById("selectOficiosParaEditar").innerHTML += oficioAInsertar;
                 document.getElementById("selectOficiosAGuardar").innerHTML += oficioAInsertar;
+            }   
         }
-        }
-);
+  );
 }
 
 
@@ -238,29 +240,67 @@ cargarOficios();
         imgFotoMostrada.src = "";
 }
 
-let imgFotoAGuardar = document.getElementById("imgFotoAGuardar");
-        let imgFotoMostrada = document.getElementById("imgFotoMostrada");
-        imgFotoAGuardar.addEventListener("change", function (event) {
-        // Obtener la imagen seleccionada
-        let imagenSeleccionada = event.target.files[0];
-                // Crear un lector de archivos
-                let reader = new FileReader();
-                // Cuando la imagen se cargue, convertirla a cadena base64 y mostrarla
-                reader.onload = function (event) {
-                // Obtener la cadena base64 de la imagen
-                let base64Image = event.target.result;
-                        // Crear un elemento de imagen
-                        let imgElement = document.createElement("img");
-                        imgFotoMostrada.src = base64Image;
-                        // Limpiar el contenedor de la imagen antes de agregar la nueva imagen
-                        //imgFotoMostrada.innerHTML = "";
 
-                        // Agregar la imagen al contenedor
-                        //imgFotoMostrada.appendChild(imgElement);
-                };
-                // Leer la imagen como una cadena base64
-                reader.readAsDataURL(imagenSeleccionada);
-        });
+let imgFotoAGuardar = document.getElementById("imgFotoAGuardar");
+let carouselInner = document.getElementById("carouselInner");
+
+imgFotoAGuardar.addEventListener("change", function (event) {
+    // Limpiar el carrusel antes de agregar nuevas imágenes
+    carouselInner.innerHTML = "";
+
+    // Iterar sobre los archivos seleccionados
+    for (let i = 0; i < event.target.files.length; i++) {
+        let imagenSeleccionada = event.target.files[i];
+        let reader = new FileReader();
+
+        reader.onload = function (event) {
+            let base64Image = event.target.result;
+            // Crear un elemento de imagen
+            let imgElement = document.createElement("img");
+            imgElement.src = base64Image;
+            imgElement.classList.add("d-block", "w-100");
+            
+            // Crear el elemento del carrusel
+            let carouselItem = document.createElement("div");
+            carouselItem.classList.add("carousel-item");
+            if (i === 0) {
+                carouselItem.classList.add("active");
+            }
+            carouselItem.appendChild(imgElement);
+            
+            // Agregar el elemento del carrusel al carrusel
+            carouselInner.appendChild(carouselItem);
+        };
+
+        // Leer la imagen como una cadena base64
+        reader.readAsDataURL(imagenSeleccionada);
+    }
+});
+
+// Función para eliminar una imagen del carrusel
+function eliminarImagen(index) {
+    let carouselItems = document.querySelectorAll(".carousel-item");
+    if (carouselItems.length === 1) {
+        // Si solo queda una imagen, limpiar el carrusel
+        carouselInner.innerHTML = "";
+    } else {
+        // Eliminar el elemento del carrusel en el índice especificado
+        carouselItems[index].remove();
+    }
+}
+
+// Evento de clic para eliminar una imagen del carrusel
+carouselInner.addEventListener("click", function(event) {
+    if (event.target.classList.contains("carousel-item")) {
+        let index = Array.from(carouselInner.children).indexOf(event.target);
+        eliminarImagen(index);
+    }
+});
+
+
+        
+        
+        
         
         function guardarPeticion() {
 
