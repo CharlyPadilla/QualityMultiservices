@@ -9,9 +9,9 @@ public class Usuario {
     private String correo;
     private String contrasenia;
     private Usuario usuarioCliente;
-    private int numeroCelular;
+    private String numeroCelular;
 
-    public Usuario(int idUsuario, int numeroCelular, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia, Usuario usuarioCliente) {
+    public Usuario(int idUsuario, String numeroCelular, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia, Usuario usuarioCliente) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.imagenPerfil = imagenPerfil;
@@ -23,11 +23,11 @@ public class Usuario {
         this.usuarioCliente = usuarioCliente;
     }
 
-    public int getNumeroCelular() {
+    public String getNumeroCelular() {
         return numeroCelular;
     }
 
-    public void setNumeroCelular(int numeroCelular) {
+    public void setNumeroCelular(String numeroCelular) {
         this.numeroCelular = numeroCelular;
     }
 

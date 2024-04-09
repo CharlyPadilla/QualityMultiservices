@@ -11,6 +11,16 @@ public class Cliente {
     }
 
     public Cliente() {
+        this.usuario = new Usuario();
+    }
+
+    public Cliente(int idUsuario, String nombreUsuario, String imagenPerfil, String ciudad, String correo) {
+        this.usuario = new Usuario();
+        usuario.setIdUsuario(idUsuario);
+        usuario.setNombreUsuario(nombreUsuario);
+        usuario.setImagenPerfil(imagenPerfil);
+        usuario.setCiudad(ciudad);
+        usuario.setCorreo(correo);
     }
 
     public int getIdCliente() {
