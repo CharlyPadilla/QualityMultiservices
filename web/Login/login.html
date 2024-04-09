@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="Author" content="Milton">
         <meta name="Content" content="Login">
-        <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
+        <link href="loginStyle.css" rel="stylesheet" type="text/css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -30,16 +30,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="form-information">
                 <div class="form-information-childs">
                     <h2>Crear Una Cuenta</h2>
-                    <div class="icons">
-                        <i class='bx bxl-google'></i>
-                        <i class='bx bxl-github'></i>
-                        <i class='bx bxl-linkedin'></i>
-                    </div>
                     <p>o usa tu e-mail para registrarte</p>
                     <form class="form" id="formulario">
-                        <label>
+                        <div>
+                        <label class="label1">
+                            <span>Usuario vendedor</span>
+                            <input id="usuarioVendedor" type="checkbox" name="usuarioVendedor">
+                            <span>Usuario Cliente</span>
+                            <input id="" type="checkbox" name="usuarioCliente">
+                        </label>
+                        <label class="label1">
                             <i class='bx bxs-file-image'></i>
-                            <input id="imagenPerfil" type="file" placeholder="Imagen de Perfil">
+                            <input class="input1" id="imagenPerfil" type="file" placeholder="Imagen de Perfil">
                         </label>
                         <label>
                             <i class='bx bx-user-circle'></i>
@@ -57,6 +59,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <i class='bx bxs-city'></i>
                             <input id="ciudad" type="text" placeholder="Ciudad">
                         </label>
+                        
+                        <div id="formularioVendedor" class="formulario-vendedor hide">
+                            <label>
+                                <select id="selectOficiosAGuardar" placeholder="Oficio"></select>
+                                
+                            </label>
+                            <label>
+                                <i class='bx bx-money'></i>
+                                <input id="aniosExperiencia" type="number" placeholder="Años de Experiencia">
+                            </label>
+                        </div>
                         <input type="submit" value="Registrarse" id="registrarButton" onclick="save()">
                         <p class="warnings" id="warnings"></p>
                     </form>
@@ -94,8 +107,39 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </div>
             </div>
         </div>
-        <script src="js/loginInt.js" type="text/javascript"></script>
-        <script src="js/User.js" type="text/javascript"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var checkbox = document.getElementById("usuarioVendedor");
+                var formularioVendedor = document.getElementById("formularioVendedor");
+
+                checkbox.addEventListener("change", function () {
+                    if (this.checked) {
+                        formularioVendedor.classList.remove("hide");
+                    } else {
+                        formularioVendedor.classList.add("hide");
+                    }
+                });
+            });
+
+            function cargarOficios() {
+                let url = 'http://localhost:8080/QualityMultiservices_v2/api/administrarOficio/obtenerOficios';
+                fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById("selectOficiosAGuardar").innerHTML = "";
+                            for (let i = 0; i < data.length; i++) {
+                                let oficio = data[i].nombreOficio;
+                                let idOficio = data[i].idOficio;
+                                let oficioAInsertar = `<option id="${oficio}" value="${idOficio}">${oficio}</option>`;
+                                document.getElementById("selectOficiosAGuardar").innerHTML += oficioAInsertar;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+            }
+        </script>
+        <script src="loginScript.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.js"></script>
     </body>
 </html>
