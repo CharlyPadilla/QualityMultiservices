@@ -38,7 +38,7 @@ public class ControllerPeticion {
             System.out.println(e.getMessage());
             respuesta = -1;
         }
-        connMySQL.close();
+        connMySQL.close(conn);
         conn.close();
         return respuesta;
     }
@@ -83,7 +83,7 @@ public class ControllerPeticion {
             listaPeticiones = null;
         }
         conn.close();
-        connMySQL.close();
+        connMySQL.close(conn);
         return listaPeticiones;
     }
     
@@ -123,7 +123,7 @@ public class ControllerPeticion {
             listaFotosPeticion = null;
         }
         conn.close();
-        connMySQL.close();
+        connMySQL.close(conn);
         return peticion;
     }
     
@@ -153,7 +153,7 @@ public class ControllerPeticion {
             System.out.println(e.getMessage());
             respuesta = -1;
         }
-        connMySQL.close();
+        connMySQL.close(conn);
         conn.close();
         return respuesta;
     }
@@ -186,7 +186,7 @@ public class ControllerPeticion {
             System.out.println(e.getMessage());
             respuesta = -1;
         }
-        connMySQL.close();
+        connMySQL.close(conn);
         conn.close();
         return respuesta;
         // Si se regresa 0 siginifica que NO se eliminó ningún registro
@@ -222,7 +222,7 @@ public class ControllerPeticion {
             listaFotosPeticion = null;
         }
         conn.close();
-        connMySQL.close();
+        connMySQL.close(conn);
         return listaFotosPeticion;
     
     }  
