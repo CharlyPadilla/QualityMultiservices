@@ -291,28 +291,6 @@ public class RestChat {
         return Response.ok(out).build();
     }
 
-    // Deletes a specific message
-    @Path("deleteMessage")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteMessage(@FormParam("idMensaje") int idMensaje) {
-        String out;
-
-        ControllerChat cc = new ControllerChat();
-        try {
-            int rowsAffected = cc.deleteMessage(idMensaje);
-            if (rowsAffected > 0) {
-                out = "{\"result\":\"Mensaje eliminado exitosamente\"}";
-            } else {
-                out = "{\"result\":\"Error al eliminar el mensaje\"}";
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            out = "{\"result\":\"Error en el servidor, favor de intentarlo de nuevo mas tarde\"}";
-        }
-        return Response.ok(out).build();
-    }
-
     // Deletes all messages associated with a specific chat
     @Path("deleteChatHistory")
     @POST

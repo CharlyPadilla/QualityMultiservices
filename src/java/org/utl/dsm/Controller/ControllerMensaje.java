@@ -130,7 +130,7 @@ public class ControllerMensaje {
         conn.close();
         return response;
     }
-
+        
     public int deleteMessage(int idMensaje) throws SQLException {
         String insert = "CALL eliminarMensaje(?)";
         ConnectioDB connMySQL = new ConnectioDB();
