@@ -1,24 +1,46 @@
-
 package org.utl.dsm.Model;
 
 public class Usuario {
-   private int idUsuario; 
-   private String nombreUsuario;
-   private String imagenPerfil;
-   private String ciudad;
-   private String correo;
-   private String contrasenia;
 
-    public Usuario(int idUsuario, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia) {
+    private int idUsuario;
+    private String nombreUsuario;
+    private String imagenPerfil;
+    private String ciudad;
+    private String correo;
+    private String contrasenia;
+    private Usuario usuarioCliente;
+    private int numeroCelular;
+
+    public Usuario(int idUsuario, int numeroCelular, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia, Usuario usuarioCliente) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.imagenPerfil = imagenPerfil;
         this.ciudad = ciudad;
         this.correo = correo;
         this.contrasenia = contrasenia;
+        this.numeroCelular = numeroCelular;
+
+        this.usuarioCliente = usuarioCliente;
     }
-    
-    public Usuario(){}
+
+    public int getNumeroCelular() {
+        return numeroCelular;
+    }
+
+    public void setNumeroCelular(int numeroCelular) {
+        this.numeroCelular = numeroCelular;
+    }
+
+    public Usuario getUsuarioCliente() {
+        return usuarioCliente;
+    }
+
+    public void setUsuarioCliente(Usuario usuarioCliente) {
+        this.usuarioCliente = usuarioCliente;
+    }
+
+    public Usuario() {
+    }
 
     public int getIdUsuario() {
         return idUsuario;
@@ -67,4 +89,8 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5960bdc96e47047a1150133589ba5474eea45d07
 }

@@ -51,13 +51,15 @@ public class ControllerPeticion {
         ConnectioDB connMySQL = new ConnectioDB();
         java.sql.Connection conn = connMySQL.open();
         ArrayList<Peticion> listaPeticiones = new ArrayList<>();
-        ArrayList<FotoPublicacion> listaFotosPeticion = new ArrayList<>();
+       
         try{
             PreparedStatement executer = conn.prepareStatement(query);
             executer.setInt(1, idUsuario);
             
             ResultSet result = executer.executeQuery();
             while(result.next()){
+                ArrayList<FotoPublicacion> listaFotosPeticion = new ArrayList<>();
+                 
                 Peticion peticion = new Peticion();
                 FotoPublicacion fotosPeticion = new FotoPublicacion();
                 peticion.setIdPeticion(result.getInt("idPeticion"));
@@ -78,7 +80,7 @@ public class ControllerPeticion {
         }catch(Exception e){
             System.out.println("Fallo al hacer consulta en la BADA (obtenerPeticiones:)");
             System.out.println(e.getMessage());
-            listaFotosPeticion = null;
+            listaPeticiones = null;
         }
         conn.close();
         connMySQL.close(conn);
