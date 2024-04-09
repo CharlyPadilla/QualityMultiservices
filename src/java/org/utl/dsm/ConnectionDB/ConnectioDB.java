@@ -9,9 +9,10 @@ public class ConnectioDB {
             
     public Connection open(){
         
-        String user = "root";
-        String password = "2024865Ss";
-        String url = "jdbc:mysql://127.0.0.1:3306/qualityMultiservices";
+      String user = "root";
+       String password = "22001049";
+
+        String url = "jdbc:mysql://127.0.0.1:3306/qualityMultiServices";
         String params = "?useSSL=false&useUnicode=true&characterEnconding=utf-8";
         
         try{

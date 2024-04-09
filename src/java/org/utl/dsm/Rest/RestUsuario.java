@@ -19,7 +19,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.utl.dsm.Model.Usuario;
 import org.utl.dsm.Controller.ControllerUsuario;
 
 /**

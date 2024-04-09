@@ -25,6 +25,8 @@ public class ControllerCliente {
 
             // Cerrar todas las instancias abiertas hacia la base de datos (bd)
             cstmt.close();
+            connMySQL.close(conn);
+        conn.close();
             conn.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
             connMySQL.close(conn);
             return cliente;
