@@ -25,8 +25,8 @@ public class ControllerCliente {
 
             // Cerrar todas las instancias abiertas hacia la base de datos (bd)
             cstmt.close();
-            conn.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
-            connMySQL.close();
+            connMySQL.close(conn);
+        conn.close();
             return cliente;
         } catch (Exception ex) {
             System.out.println("Error al ejecutar el procedimiento almacenado: " + ex.getMessage());

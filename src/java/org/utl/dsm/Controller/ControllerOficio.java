@@ -34,8 +34,8 @@ public class ControllerOficio {
             System.out.println(e.getMessage());
             listaOficios = null;
         }
+        connMySQL.close(conn);
         conn.close();
-        connMySQL.close();
         return listaOficios;
     }
 }

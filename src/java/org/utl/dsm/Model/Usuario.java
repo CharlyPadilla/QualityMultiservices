@@ -89,8 +89,4 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 5960bdc96e47047a1150133589ba5474eea45d07
 }
