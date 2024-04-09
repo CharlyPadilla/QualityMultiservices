@@ -7,16 +7,18 @@ public class Vendedor {
     private int aniosExperiencia;
     private Usuario usuario;
 
-    public Vendedor(int idVendedor, int idOficio, int aniosExperiencia, Usuario usuario) {
+    public Vendedor(int idVendedor, Oficio oficio, int aniosExperiencia, Usuario usuario) {
         this.idVendedor = idVendedor;
-        this.oficio = new Oficio();
-        this.oficio.setIdOficio(idOficio);
+        this.oficio = oficio;
         this.aniosExperiencia = aniosExperiencia;
         this.usuario = usuario;
     }
 
     public int getIdVendedor() {
         return idVendedor;
+    }
+
+    public Vendedor() {
     }
 
     public void setIdVendedor(int idVendedor) {
@@ -27,10 +29,11 @@ public class Vendedor {
         return oficio;
     }
 
-    public void setOficio(int idOficio) {
-        this.oficio = new Oficio();
-        this.oficio.setIdOficio(idOficio);
+    public void setOficio(Oficio oficio) {
+        this.oficio = oficio;
     }
+
+    
 
     public int getAniosExperiencia() {
         return aniosExperiencia;

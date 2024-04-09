@@ -5,11 +5,30 @@ import java.util.ArrayList;
 
 public class Publicacion {
     private int idPublicacion;
+    private String titulo;
     private Usuario usuario;
     private String descripcion;
     private String fechaCreacion;
     private String fechaEdicion;
     private ArrayList<FotoPublicacion> listaFotos; 
+
+    public Publicacion(int idPublicacion, String titulo, Usuario usuario, String descripcion, String fechaCreacion, String fechaEdicion, ArrayList<FotoPublicacion> listaFotos) {
+        this.idPublicacion = idPublicacion;
+        this.titulo = titulo;
+        this.usuario = usuario;
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaEdicion = fechaEdicion;
+        this.listaFotos = listaFotos;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
     
     public Publicacion(int idPublicacion, int idUsuario, String descripcion, String fechaCreacion, String fechaEdicion) {
@@ -29,9 +48,7 @@ public class Publicacion {
         this.fechaEdicion = fechaEdicion;
     }
 
-    Publicacion() {
-        this.usuario = new Usuario();
-    }
+    public Publicacion() {}
 
      public ArrayList<FotoPublicacion> getListaFotos() {
         return listaFotos;

@@ -4,12 +4,12 @@ package org.utl.dsm.Model;
 public class FotoPublicacion {
     private int idFotoPublicacion;
     private String cadenaFoto;
-    private Publicacion publicacion;
+    private int idPublicacion;
     
-    public FotoPublicacion(int idFotoPublicacion, String cadenaFoto, Publicacion publicacion) {
+    public FotoPublicacion(int idFotoPublicacion, String cadenaFoto, int idPublicacion) {
         this.idFotoPublicacion = idFotoPublicacion;
         this.cadenaFoto = cadenaFoto;
-        this.publicacion = publicacion;
+        this.idPublicacion = idPublicacion;
     }
 
     public FotoPublicacion(){}
@@ -30,12 +30,12 @@ public class FotoPublicacion {
         this.cadenaFoto = cadenaFoto;
     }
 
-    public Publicacion getPublicacion() {
-        return publicacion;
+    public int getPublicacion() {
+        return idPublicacion;
     }
 
-    public void setPublicacion(Publicacion publicacion) {
-        this.publicacion = publicacion;
+    public void setPublicacion(int publicacion) {
+        this.idPublicacion = publicacion;
     }
     
     
