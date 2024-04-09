@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import org.utl.dsm.ConnectionDB.ConnectioDB;
 import org.utl.dsm.Model.Anuncio;
 import org.utl.dsm.Model.FotoPublicacion;
-import org.utl.dsm.Model.Peticion;
 
 public class ControllerAnuncio {
  
@@ -54,13 +53,15 @@ public class ControllerAnuncio {
         ConnectioDB connMySQL = new ConnectioDB();
         java.sql.Connection conn = connMySQL.open();
         ArrayList<Anuncio> listaAnuncio = new ArrayList<>();
-        ArrayList<FotoPublicacion> listaFotosPeticion = new ArrayList<>();
+        
         try{
             PreparedStatement executer = conn.prepareStatement(query);
             executer.setInt(1, idUsuario);
             
             ResultSet result = executer.executeQuery();
             while(result.next()){
+                ArrayList<FotoPublicacion> listaFotosPeticion = new ArrayList<>();
+                
                 Anuncio anuncio = new Anuncio();
                 FotoPublicacion fotosPeticion = new FotoPublicacion();
                 anuncio.setIdAnuncio(result.getInt("idAnuncio"));
@@ -81,7 +82,7 @@ public class ControllerAnuncio {
         }catch(Exception e){
             System.out.println("Fallo al hacer consulta en la BADA (obtenerAnuncios):");
             System.out.println(e.getMessage());
-            listaFotosPeticion = null;
+            listaAnuncio = null;
         }
         conn.close();
         connMySQL.close();
@@ -192,6 +193,36 @@ public class ControllerAnuncio {
         conn.close();
         connMySQL.close();
         return listaAnuncio;
+    }
+    
+    
+    public boolean validarToken(String token) {
+         boolean resul;
+            String query = "SELECT * FROM usuario WHERE token = ?";
+        try {
+            ConnectioDB connMySQL = new ConnectioDB();
+            java.sql.Connection conn = connMySQL.open();
+            PreparedStatement ejecutor = conn.prepareStatement(query);
+
+            ejecutor.setString(1, token);
+           
+            // Ejecutamos la consulta
+            ResultSet resultado = ejecutor.executeQuery();
+         
+            if (resultado.next()){
+                resul = true;
+            }else {
+                resul = false;
+            }
+
+            ejecutor.close();
+            connMySQL.close();
+            return resul;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
 }

@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-/nbproject/private/
-=======
->>>>>>> 399196f19471616aff52bdd5450ac063e690c0ce
-/build/
+
+/nbproject/
+
+src/java/org/utl/dsm/ConnectionDB

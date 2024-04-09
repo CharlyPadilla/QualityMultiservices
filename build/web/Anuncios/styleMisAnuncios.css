@@ -1,0 +1,23 @@
+ .profile-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 2vh;
+      margin-bottom: 3vh; 
+    }
+    
+    .card {
+      padding: 2vh;
+      width: 80%;
+      margin: auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      background-color: #272643;
+    }
+    
+    .round-img {
+        border-radius: 50%; /* Establece el borde redondeado */
+    }
