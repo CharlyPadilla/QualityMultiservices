@@ -1,4 +1,4 @@
-
+    
 package org.utl.dsm.ConnectionDB;
 
 import java.sql.Connection;
@@ -24,7 +24,7 @@ public class ConnectioDB {
         }
     }
     
-    public void close(){
+    public void close(Connection conn1){
         if(conn == null){
             try{
                 conn.close();

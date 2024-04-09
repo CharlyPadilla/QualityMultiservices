@@ -1,0 +1,361 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 8 abr. 2024, 18:54:27
+    Author     : Milk
+*/
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #8e9eab;  
+    background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  
+    background: linear-gradient(to top, #eef2f3, #8e9eab); 
+    background-size: cover;
+}
+
+.container-form{
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+    height: 500px;
+    max-width: 900px;
+    transition: all 1s ease;
+    margin: 10px;
+}
+
+.information{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #e3f6f5;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.info-childs{
+    width: 100%;
+    padding: 0 30px;
+}
+
+.info-childs h2{
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.info-childs p{
+    margin: 15px 0;
+    color: #555;
+}
+
+.info-childs input{
+    background-color: transparent;
+    outline: none;
+    border: solid 2px #000000;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.info-childs input:hover{
+    background-color: #000000;
+    border: none;
+    color: #F5F5DC;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-information{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-information-childs{
+    padding: 0 30PX;
+}
+
+.form-information-childs h2 {
+    color: #333;
+    font-size: 2rem;
+}
+
+.form-information-childs p {
+    color: #555;
+    
+}
+
+.icons{
+    margin: 15px 0;
+}
+
+.icons i{
+    border-radius: 50%;
+    padding: 15px;
+    border: solid thin #000000;
+    cursor: pointer;
+    margin: 0 10px;
+    color: #000000;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.icons i:hover{
+    background-color: #c7c7f3;
+    color: #f8f8f8;
+}
+
+.form{
+    margin: 30px 0 0 0;
+}
+
+.form label{
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    text-align: center;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form label input{
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #333;
+}
+
+.form input[type="submit"]{
+    background-color: #9191bd;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form input[type="submit"] hover{
+    background-color: #7a7a9a;
+}
+
+.hide{
+    position: absolute;
+    transform: translate(+300%);
+}
+@media screen and (max-width: 750px){
+    html{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 580px){
+    html{
+        font-size: 10px;
+    }
+    .container-form{
+        flex-direction: column;
+        height: auto;
+    }
+    .information{
+        width: 100%;
+        padding: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0;
+    }
+    .form-information{
+        width: 100%;
+        padding: 20px;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 0px;
+    }
+}
+
+
+.container-form1 {
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+    height: 500px;
+    max-width: 900px;
+    transition: all 1s ease;
+    margin: 10px;
+    background-color: #222; /* Cambio de color de fondo a negro */
+}
+
+.information1 {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #272643; /* Cambio de color de fondo a blanco */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.info-childs1 {
+    width: 100%;
+    padding: 0 30px;
+}
+
+.info-childs1 h2 {
+    font-size: 2.5rem;
+    color: #fff; /* Cambio de color de texto a blanco */
+}
+
+.info-childs1 p {
+    margin: 15px 0;
+    color: #fff; /* Cambio de color de texto a blanco */
+}
+
+.info-childs1 input {
+    background-color: transparent;
+    outline: none;
+    border: solid 2px #fff; /* Cambio de color del borde a blanco */
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #fff; /* Cambio de color de texto a blanco */
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.info-childs1 input:hover {
+    background-color: #fff; /* Cambio de color de fondo al pasar el mouse a blanco */
+    border: none;
+    color: #222; /* Cambio de color de texto a negro */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-information1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+    background-color: #2c698d; /* Cambio de color de fondo a negro */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-information-childs1 {
+    padding: 0 30px;
+}
+
+.form-information-childs1 h2 {
+    color: #fff; /* Cambio de color de texto a blanco */
+    font-size: 2rem;
+}
+
+.form-information-childs1 p {
+    color: #fff; /* Cambio de color de texto a blanco */
+}
+
+.icons1 {
+    margin: 15px 0;
+}
+
+.icons1 i {
+    border-radius: 50%;
+    padding: 15px;
+    border: solid thin #fff; /* Cambio de color del borde a blanco */
+    cursor: pointer;
+    margin: 0 10px;
+    color: #fff; /* Cambio de color de texto a blanco */
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.icons1 i:hover {
+    background-color: #fff; /* Cambio de color de fondo al pasar el mouse a blanco */
+    color: #222; /* Cambio de color de texto a negro */
+}
+
+.form1 {
+    margin: 30px 0 0 0;
+}
+
+.form1 label {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Cambio de color de fondo a negro */
+    text-align: center;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form1 label input {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff; /* Cambio de color de fondo a negro */
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #000000; /* Cambio de color de texto a blanco */
+}
+
+.form1 input[type="submit"] {
+    background-color: #fff; /* Cambio de color de fondo a blanco */
+    color: #222; /* Cambio de color de texto a negro */
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form1 input[type="submit"]:hover {
+    background-color: #7a7a9a;
+}
