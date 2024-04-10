@@ -7,7 +7,13 @@
 /dist/
 =======
 
+<<<<<<< HEAD
 /nbproject/
 
 src/java/org/utl/dsm/ConnectionDB
 >>>>>>> 06c6cdb8ad9de09dc97934d0fac6ea61de2a388e
+=======
+/nbproject/private/
+/build/
+/dist/
+>>>>>>> 6f8d1b928efa1ed0e980e637e871d99ace973a31

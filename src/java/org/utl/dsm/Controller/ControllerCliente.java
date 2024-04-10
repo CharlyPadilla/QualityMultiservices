@@ -27,10 +27,16 @@ public class ControllerCliente {
             cstmt.setString(3, cliente.getUsuario().getImagenPerfil());
             cstmt.setString(4, cliente.getUsuario().getCiudad());
             cstmt.setString(5, cliente.getUsuario().getNumeroCelular());
+<<<<<<< HEAD
             cstmt.setString(6, cliente.getUsuario().getContrasenia());
             cstmt.execute();
+=======
+
+>>>>>>> 6f8d1b928efa1ed0e980e637e871d99ace973a31
             // Cerrar todas las instancias abiertas hacia la base de datos (bd)
             cstmt.close();
+            connMySQL.close(conn);
+        conn.close();
             conn.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
             connMySQL.close(conn);
             return cliente;

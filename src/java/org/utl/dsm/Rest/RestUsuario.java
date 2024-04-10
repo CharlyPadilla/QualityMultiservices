@@ -4,6 +4,8 @@
  */
 package org.utl.dsm.Rest;
 
+import com.google.gson.Gson;
+import jakarta.ws.rs.DefaultValue;
 import org.utl.dsm.ConnectionDB.ConnectioDB;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
@@ -19,8 +21,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.utl.dsm.Model.Usuario;
 import org.utl.dsm.Controller.ControllerUsuario;
+import org.utl.dsm.Model.Usuario;
 
 /**
  *
@@ -124,4 +126,158 @@ public class RestUsuario {
 
         return Response.ok(out).build();
     }
+    
+    @Path("insertarUsuarioCliente")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertarUsuarioCliente(@FormParam("nombreUsuario") String nombreUsuario,
+                                            @FormParam("imagenPerfil") String imagenPerfil,
+                                            @FormParam("ciudad") String ciudad,
+                                            @FormParam("correo") String correo,
+                                            @FormParam("contrasenia") String contrasenia) throws SQLException {
+        ControllerUsuario cl = new ControllerUsuario();
+        String out="";
+        Gson gson = new Gson();
+
+        // Verificar si el usuario ya existe
+        if (cl.usuarioExiste(correo)) {
+            out = """
+                      { "response": "Ya existe una cuenta con el correo ingreasado" }
+                     """;
+        } else {
+            // Insertar usuario
+            int idUsuario = cl.insertarUsuarioCliente(nombreUsuario, imagenPerfil, ciudad, correo, contrasenia);
+
+            // Generar token
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            String tokenString = nombreUsuario + ":" + contrasenia + timeStamp;
+            byte[] tokenBytes = tokenString.getBytes(StandardCharsets.UTF_8);
+            String token = cl.bytesToHex(tokenBytes);
+
+            // Asignar token al usuario
+            cl.actualizarTokenConIdUsuario(idUsuario, token);
+           
+            Usuario usuario = cl.buscarUsuario(correo, contrasenia);
+            out = gson.toJson(usuario);
+             out = String.format(out, token); 
+        }
+        return Response.ok(out).build();
+    }
+    
+    
+    @Path("insertarUsuarioVendedor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertarUsuarioVendedor(@FormParam("nombreUsuario") String nombreUsuario,
+                                            @FormParam("imagenPerfil") String imagenPerfil,
+                                            @FormParam("ciudad") String ciudad,
+                                            @FormParam("correo") String correo,
+                                            @FormParam("contrasenia") String contrasenia,
+                                            @FormParam("idOficio") int idOficio,
+                                            @FormParam("aniosExperiencia") int aniosExperiencia) throws SQLException {
+        ControllerUsuario cl = new ControllerUsuario();
+        String out="";
+        Gson gson = new Gson();
+
+        // Verificar si el usuario ya existe
+        if (cl.usuarioExiste(correo)) {
+            out = """
+                      { "response": "Ya existe una cuenta con el correo ingreasado" }
+                     """;
+        } else {
+            // Insertar usuario
+            int idUsuario = cl.insertarUsuarioVendedor(nombreUsuario, imagenPerfil, ciudad, correo, contrasenia, idOficio, aniosExperiencia);
+
+            // Generar token
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            String tokenString = nombreUsuario + ":" + contrasenia + timeStamp;
+            byte[] tokenBytes = tokenString.getBytes(StandardCharsets.UTF_8);
+            String token = cl.bytesToHex(tokenBytes);
+
+            // Asignar token al usuario
+            cl.actualizarTokenConIdUsuario(idUsuario, token);
+            
+            Usuario usuario = cl.buscarUsuario(correo, contrasenia);
+            out = gson.toJson(usuario);
+        }
+        return Response.ok(out).build();
+    }
+    
+    
+     @Path("loginConToken")
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    public Response validarLoginConToken_BD(@FormParam("correo") @DefaultValue("") String correo,
+                                            @FormParam("contrasenia") @DefaultValue("") String contrasenia) {
+        String out = "{}";
+         Usuario us = new Usuario();
+        ControllerUsuario cu = new ControllerUsuario();
+
+        try {
+            us = cu.buscarUsuario(correo, contrasenia );
+            Gson gson = new Gson();
+
+            if (us == null) {
+                out = """
+                      {"Mensaje": "Credenciales no válidas"}
+                      """;
+                 System.out.println("Credenciales no válidas");
+            } else {
+                
+                 ControllerUsuario cl = new ControllerUsuario();
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+            String tokenString = correo + ":"
+                    + contrasenia + ""
+                    + timeStamp;
+            
+            byte[] tokenBytes = tokenString.getBytes(java.nio.charset.StandardCharsets.UTF_8);     
+                
+            String token = cl.bytesToHex(tokenBytes);  
+                  
+            us.setToken(token);
+                System.out.println("");
+                int actualizacion = cu.actualizarTokenConIdUsuario(us.getIdUsuario(), us.getToken());
+                
+                System.out.println("¿Se actualizó el token?: "+ actualizacion);
+                
+                out = gson.toJson(us);
+            }
+
+        } catch (Exception e) {
+            System.out.println("NO SE INSERTÓ EN LA BD");
+            System.out.println(e.getMessage());
+             out = """
+                      {"Mensaje": "ERROR"}
+                      """;
+        }
+        return Response.status(Response.Status.OK).entity(out).build();
+
+    }
+    
+    
+    @Path("cerrarSesion")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response cerrarSesion(@QueryParam("idUsuario") @DefaultValue("0") int idUsuario) {
+        
+        String out = """
+                  { }
+                  """;
+            ControllerUsuario cl = new ControllerUsuario();
+            
+            int resultado = cl.cerrarSesionToken(idUsuario);
+            if(resultado < 1) {
+                out = """
+                  { "Mensaje": "ERROR" }
+                  """;
+            } else {
+                out = """
+                  { "Mensaje": "Sesión cerrada" }
+                  """;
+                System.out.println("Sesión cerrada con éxito");
+            }
+      
+        return Response.ok(out).build();
+    }
+
 }

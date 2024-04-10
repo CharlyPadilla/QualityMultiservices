@@ -10,6 +10,10 @@ public class Usuario {
     private String contrasenia;
     private Usuario usuarioCliente;
     private String numeroCelular;
+<<<<<<< HEAD
+=======
+    private String token;
+>>>>>>> 6f8d1b928efa1ed0e980e637e871d99ace973a31
 
     public Usuario(int idUsuario, String numeroCelular, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia, Usuario usuarioCliente) {
         this.idUsuario = idUsuario;
@@ -22,7 +26,22 @@ public class Usuario {
 
         this.usuarioCliente = usuarioCliente;
     }
+    
+    public Usuario(int idUsuario, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String token) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.imagenPerfil = imagenPerfil;
+        this.ciudad = ciudad;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
+        this.token = token;
 
+<<<<<<< HEAD
+=======
+        this.usuarioCliente = usuarioCliente;
+    }
+
+>>>>>>> 6f8d1b928efa1ed0e980e637e871d99ace973a31
     public String getNumeroCelular() {
         return numeroCelular;
     }
@@ -90,4 +109,13 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
+    
 }
