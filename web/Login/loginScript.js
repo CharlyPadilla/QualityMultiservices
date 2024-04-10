@@ -266,4 +266,58 @@ function guardarUsuarioVendedor(){
                 }
         );
 }
+
+
+function iniciarSesion(){
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    
+    
+    let params = {
+        correo: email,
+        contrasenia: password
+    };
+    
+    let url = "http://localhost:8080/QualityMultiservices_v2/api/usuario/loginConToken";
+
+    const queryString = new URLSearchParams(params).toString();
+                const requestOptions = {
+                method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        body: queryString // Enviar la cadena de consulta como el cuerpo de la solicitud
+                };
+                fetch(url, requestOptions).then(
+                function (response) {
+                return response.json(); // Analiza la respuesta JSON
+                }
+        ).then(
+                function (data) {
+                    
+                    if(data.response.equals("Credenciales no válidas")){
+                        Swal.fire({
+                            icon: "error",
+                            title: "Ops...",
+                            text: "Credenciales no válidas"
+                        });
+                    }else if(data.response.equals("ERROR")){
+                        Swal.fire({
+                            icon: "error",
+                            title: "Ops...",
+                            text: "Error inesperado. Intentelo más tarde"
+                        });
+                        
+                    }else{
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("fotoPerfilCadena", data.imagenPerfil);
+                        localStorage.setItem("idUsuario", data.idUsuario);
+                        if(data.vendedor===true){
+                            window.location.href = 'InicioUsuarioVendedor.html';
+                        }else{
+                            window.location.href = 'InicioUsuarioVendedor.html';
+                        }
+                        
+                    }
+                }
+        );
+}
                     

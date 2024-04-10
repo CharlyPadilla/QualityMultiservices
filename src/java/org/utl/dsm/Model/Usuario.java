@@ -10,6 +10,7 @@ public class Usuario {
     private String contrasenia;
     private Usuario usuarioCliente;
     private String numeroCelular;
+    private String token;
 
     public Usuario(int idUsuario, String numeroCelular, String nombreUsuario, String imagenPerfil, String ciudad, String correo, String contrasenia, Usuario usuarioCliente) {
         this.idUsuario = idUsuario;
@@ -101,8 +102,14 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 5960bdc96e47047a1150133589ba5474eea45d07
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
+    
 }

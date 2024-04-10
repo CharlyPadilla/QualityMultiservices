@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.utl.dsm.Controller.ControllerUsuario;
+import org.utl.dsm.Model.Usuario;
 
 /**
  *
@@ -205,11 +206,11 @@ public class RestUsuario {
     
      @Path("loginConToken")
     @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response validarLoginConToken_BD(@QueryParam("correo") @DefaultValue("") String correo,
-                                            @QueryParam("contrasenia") @DefaultValue("") String contrasenia) {
+    @POST
+    public Response validarLoginConToken_BD(@FormParam("correo") @DefaultValue("") String correo,
+                                            @FormParam("contrasenia") @DefaultValue("") String contrasenia) {
         String out = "{}";
-        Usuario us = new Usuario();
+         Usuario us = new Usuario();
         ControllerUsuario cu = new ControllerUsuario();
 
         try {
