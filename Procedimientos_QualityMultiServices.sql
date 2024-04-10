@@ -1,4 +1,6 @@
--- ************* SCRIPT DE PROCEDIMIENTOS ************* --
+											-- ************************** SCRIPT DE PROCEDIMIENTOS ************************** --
+                                            
+-- ******* PROCEDIMIENTOS REGISTRO DE USUARIO ******** --
 
 -- Procedimiento registrar a un usuario tipo cliente
 DROP PROCEDURE IF EXISTS insertarCliente;
@@ -10,17 +12,39 @@ CREATE PROCEDURE insertarCliente (
     IN ciudad VARCHAR(60),
     IN correo VARCHAR(80),
     IN contrasenia VARCHAR(60)
-    -- out idCliente INT
 )
 BEGIN 
-	INSERT INTO usuario VALUES (0, nombreUsuario, imagenPerfil, ciudad, correo, contrasenia);
+	INSERT INTO usuario (nombreUsuario, imagenPerfil, ciudad, correo, contrasenia, vendedor) VALUES (nombreUsuario, imagenPerfil, ciudad, correo, contrasenia, FALSE);
     INSERT INTO cliente VALUES (0, (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
+	SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1;
+END $$
+DELIMITER ; 
+
+
+-- Procedimiento registrar a un usuario tipo vendedor y cliente
+DROP PROCEDURE IF EXISTS insertarVendedor;
+DELIMITER $$
+CREATE PROCEDURE insertarVendedor (
+	-- OUT idUsuario INT,
+    IN nombreUsuario VARCHAR(50),
+    IN imagenPerfil LONGTEXT,
+    IN ciudad VARCHAR(60),
+    IN correo VARCHAR(80),
+    IN contrasenia VARCHAR(60),
+    IN idOficio INT,
+    IN aniosExperiencia INT
+)
+BEGIN 
+	INSERT INTO usuario (nombreUsuario, imagenPerfil, ciudad, correo, contrasenia, vendedor) VALUES (nombreUsuario, imagenPerfil, ciudad, correo, contrasenia, TRUE);
+    INSERT INTO cliente VALUES (0, (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
+    INSERT INTO cliente VALUES (0, (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
+	SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1;
 END $$
 DELIMITER ; 
 
 
 
---     ---PROCEDIMIENTOS PARA PETICIÓN---     --
+-- ****** PROCEDIMIENTOS PARA PETICIÓN *******     --
 
 -- Procedimiento para registrar una publicación tipo petición
 DROP PROCEDURE IF EXISTS registrarPublicacionPeticion;
@@ -37,7 +61,7 @@ BEGIN
     INSERT INTO peticion (idOficioBuscado, idPublicacion) VALUES 
 		(idOficio, (SELECT idPublicacion FROM publicacion ORDER BY idPublicacion DESC LIMIT 1));
 	INSERT INTO fotoPublicacion VALUES (0, cadenaFoto, (SELECT idPublicacion FROM publicacion ORDER BY idPublicacion DESC LIMIT 1));
-    SELECT idPeticion FROM peticion ORDER BY idPeticion DESC LIMIT 1;
+    SELECT idPublicacion FROM publicacion ORDER BY idPublicacion DESC LIMIT 1;
 END $$
 DELIMITER ;
 /* CALL registrarPublicacionPeticion(
@@ -71,10 +95,10 @@ BEGIN
         JOIN oficio o ON pet.idOficioBuscado = o.idOficio
 		JOIN fotoPublicacion fp ON p.idPublicacion = fp.idPublicacion
     WHERE 
-        u.idUsuario = idUsuario;
+        u.idUsuario = idUsuario ORDER BY pet.idPeticion DESC;
 END $$
 DELIMITER ;
--- CALL mostrarPublicacionesPeticion(1);
+-- CALL mostrarPublicacionesPeticion(2);
 
 
 -- Procedimineto para mostrar los datos de UNA publicación tipo petición de un usuario
@@ -103,9 +127,33 @@ BEGIN
         pet.idPeticion = idPeticion;
 END $$
 DELIMITER ;
--- CALL mostrarPublicacionPeticion(1);
+-- CALL mostrarPublicacionPeticion(2);
+	
+    
+ 
+-- Vista para mostrar los datos de todas las publicaciones tipo anuncio
+DROP VIEW IF EXISTS mostrarTodasLasPeticiones;
+CREATE VIEW mostrarTodasLasPeticiones AS
+	SELECT 
+        u.nombreUsuario,
+        p.idPublicacion,
+        p.descripcion AS descripcionPublicacion,
+        p.fechaCreacion,
+        p.fechaEdicion,
+		pet.idPeticion,
+        o.nombreOficio,
+        fp.cadenaFoto AS fotoPublicacion
+    FROM 
+        usuario u
+        JOIN publicacion p ON u.idUsuario = p.idUsuario
+        JOIN peticion pet ON p.idPublicacion = pet.idPublicacion
+        JOIN oficio o ON pet.idOficioBuscado = o.idOficio
+		JOIN fotoPublicacion fp ON p.idPublicacion = fp.idPublicacion ORDER BY pet.idPeticion DESC;
+-- SELECT * FROM mostrarTodasLasPeticiones;
+
 
 	
+    
 -- Procedimiento para actualizar una publicación tipo petición
 DROP PROCEDURE IF EXISTS actualizarPublicacionPeticion;
 DELIMITER $$
@@ -122,7 +170,7 @@ BEGIN
     SELECT idPublicacion INTO in_idPublicacion FROM peticion WHERE idPeticion = in_idPeticion;
 
 	UPDATE publicacion 
-		SET descripcion=in_descripcion, fechaEdicion= (SELECT CURRENT_TIMESTAMP()) WHERE idPublicacion= in_idPublicacion;
+		SET descripcion=in_descripcion, fechaEdicion= (NOW()) WHERE idPublicacion= in_idPublicacion;
     
     UPDATE peticion SET idOficioBuscado= in_idOficio WHERE idPublicacion= in_idPublicacion;
     
@@ -134,9 +182,9 @@ BEGIN
 
 END $$
 DELIMITER ;
-/*CALL actualizarPublicacionPeticion(
-    1, -- ID de la petición
-    'Descripción de petición', -- Descripción de la publicación
+/* CALL actualizarPublicacionPeticion(
+    2, -- ID de la petición
+    'Descripción de petición actualizada', -- Descripción de la publicación
     'Cadena de foto en formato LONGTEXT', -- Cadena de foto en formato largo
     2 -- ID del oficio
 );*/
@@ -228,7 +276,7 @@ BEGIN
         u.idUsuario = idUsuario;
 END $$
 DELIMITER ;
--- CALL mostrarPublicacionesAnuncio(2); -- Se pasa el id del usuario
+ -- CALL mostrarPublicacionesAnuncio(2); -- Se pasa el id del usuario
 
 
 -- Procedimineto para mostrar los datos de UNA publicación tipo anuncio de un usuario
@@ -329,34 +377,23 @@ DELIMITER ;
  -- CALL eliminarPublicacionAnuncio(2);
 
 
-/*
--- Procedimiento para registrar una publicación tipo petición con más de una foto
-DROP PROCEDURE IF EXISTS registrarPublicacionPeticion;
-DELIMITER $$
-CREATE PROCEDURE registrarPublicacionPeticion(
-	IN idUsuario INT,
-	IN descripcion VARCHAR(255),
-    IN JSONCadenaFoto JSON,
-    IN idOficio INT
-)
-BEGIN
-	DECLARE i INT;  SET i =0;
-	INSERT INTO publicacion (idUsuario, descripcion, fechaCreacion) VALUES (idUsuario, descripcion, NOW());
-    INSERT INTO peticion (idOficioBuscado, idPublicacion) VALUES 
-		(idOficio, (SELECT idPublicacion FROM publicacion ORDER BY idPublicacion DESC LIMIT 1));
-        
-        WHILE i < JSON_LENGTH(JSONCadenaFoto) DO
-			INSERT INTO fotoPublicacion (idPublicacion, cadenaFoto) VALUES (idPublicacion, 
-				(SELECT JSON_EXTRACT(JSONCadenaFoto, i)));
-		END WHILE;
-END $$
-DELIMITER ;
-	CALL registrarPublicacionPeticion(
-    3, -- ID del usuario
-    'Descripción de la publicación', -- Descripción de la publicación
-    '["foto1.jpg", "foto2.jpg", "foto3.jpg"]', -- Cadena JSON con las fotos
-    1 -- ID del oficio
-);
-SELECT * FROM publicacion;
- */
+-- Vista para mostrar los datos de todas las publicaciones tipo anuncio
+DROP VIEW IF EXISTS mostrarTodosLosAnuncios;
+CREATE VIEW mostrarTodosLosAnuncios AS
+	SELECT 
+        u.nombreUsuario,
+        p.idPublicacion,
+        p.descripcion AS descripcionPublicacion,
+        p.fechaCreacion,
+        p.fechaEdicion,
+        an.idAnuncio,
+        o.nombreOficio,
+        fp.cadenaFoto AS fotoPublicacion
+    FROM 
+        usuario u
+        JOIN publicacion p ON u.idUsuario = p.idUsuario
+        JOIN anuncio an ON p.idPublicacion = an.idPublicacion
+        JOIN oficio o ON an.idOficioOfrecido = o.idOficio
+		JOIN fotoPublicacion fp ON p.idPublicacion = fp.idPublicacion;
+-- SELECT * FROM mostrarTodosLosAnuncios;
 

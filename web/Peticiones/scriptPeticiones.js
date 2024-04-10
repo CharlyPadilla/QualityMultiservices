@@ -296,7 +296,7 @@ carouselInner.addEventListener("click", function(event) {
         eliminarImagen(index);
     }
 });
-
+    
 
         
         

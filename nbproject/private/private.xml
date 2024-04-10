@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
             <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/Peticiones/scriptPeticiones.js</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/src/java/org/utl/dsm/Rest/RestAnuncio.java</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/Login/loginScript.js</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/Anuncios/scriptAnuncios.js</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/index.html</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/Peticiones/Peticiones.html</file>
+            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/src/java/org/utl/dsm/Controller/ControllerPeticion.java</file>
+            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/src/java/org/utl/dsm/Rest/RestPeticion.java</file>
             <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/src/java/org/utl/dsm/Controller/ControllerUsuario.java</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/src/java/org/utl/dsm/Rest/RestUsuario.java</file>
-            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/Anuncios/Anuncios.html</file>
+            <file>file:/C:/Users/charl/Downloads/UNI_Local/APW4.0_L/QualityMultiservices_v2/web/Peticiones/Peticiones.html</file>
         </group>
     </open-files>
 </project-private>
