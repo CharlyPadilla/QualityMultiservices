@@ -21,7 +21,7 @@ public class ControllerCliente {
             cstmt.setString(2, cliente.getUsuario().getNombreUsuario());
             cstmt.setString(3, cliente.getUsuario().getImagenPerfil());
             cstmt.setString(4, cliente.getUsuario().getCiudad());
-            cstmt.setInt(5, cliente.getUsuario().getNumeroCelular());
+            cstmt.setString(5, cliente.getUsuario().getNumeroCelular());
 
             // Cerrar todas las instancias abiertas hacia la base de datos (bd)
             cstmt.close();
