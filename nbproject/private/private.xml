@@ -5,9 +5,9 @@
         <group>
             <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/src/java/org/utl/dsm/Controller/ControllerCliente.java</file>
             <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/src/java/org/utl/dsm/Rest/RestCliente.java</file>
-            <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/web/UsuarioPerfil_Vendedor.html</file>
-            <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/web/Style/css_UsuarioPerfil_Vendedor.css</file>
+            <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/src/java/org/utl/dsm/ConnectionDB/ConnectioDB.java</file>
             <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/src/java/org/utl/dsm/Model/Cliente.java</file>
+            <file>file:/C:/Users/adria/OneDrive/Escritorio/qualitymultiservices/QualityMultiservices/web/Vendedor/UsuarioPerfil_Vendedor.html</file>
         </group>
     </open-files>
 </project-private>

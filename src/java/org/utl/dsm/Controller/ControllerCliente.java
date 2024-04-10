@@ -40,14 +40,15 @@ public class ControllerCliente {
         return null;
     }
 
-    public ArrayList<Cliente> mostrarClientes() {
-        String query = "SELECT idUsuario, nombreUsuario, imagenPerfil, ciudad, correo FROM Usuario";
+    public ArrayList<Cliente> mostrarClientes(int idUsuarioIngresado) {
+        String query = "SELECT idUsuario, nombreUsuario, imagenPerfil, ciudad, correo FROM Usuario  WHERE idUsuario = ?";
         try {
             ConnectioDB connMysql = new ConnectioDB();
             Connection conn = connMysql.open();
 
             // Se utiliza un PreparedStatement para ejecutar la consulta SELECT
             PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1,idUsuarioIngresado);
             ResultSet resultado = pstm.executeQuery();
 
             ArrayList<Cliente> listaClientes = new ArrayList<>();
@@ -72,7 +73,7 @@ public class ControllerCliente {
             // Cierre de recursos
             resultado.close();
             pstm.close();
-            connMysql.close();
+            connMysql.close(conn);
 
             return listaClientes;
         } catch (SQLException e) {

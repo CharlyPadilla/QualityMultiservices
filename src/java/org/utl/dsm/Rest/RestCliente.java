@@ -48,15 +48,16 @@ public class RestCliente {
     @Path("obtenerTodoClientes")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obtenerTodoClientes() {
+    public Response obtenerTodoClientes(@QueryParam("idUsuario") @DefaultValue("0") int idUsuario) {
         String out = "";
 
         try {
             // Instanciar el controlador de clientes
             ControllerCliente controller = new ControllerCliente();
+            System.out.println("Id del cliente seleccionado " + idUsuario);
             
             // Obtener la lista de clientes
-            ArrayList<Cliente> listaClientes = controller.mostrarClientes();
+            ArrayList<Cliente> listaClientes = controller.mostrarClientes(idUsuario);
 
             // Convertir la lista de clientes a formato JSON
             Gson gson = new Gson();
