@@ -27,13 +27,10 @@ public class ControllerCliente {
             cstmt.setString(3, cliente.getUsuario().getImagenPerfil());
             cstmt.setString(4, cliente.getUsuario().getCiudad());
             cstmt.setString(5, cliente.getUsuario().getNumeroCelular());
-<<<<<<< HEAD
             cstmt.setString(6, cliente.getUsuario().getContrasenia());
             cstmt.execute();
-=======
 
->>>>>>> 6f8d1b928efa1ed0e980e637e871d99ace973a31
-            // Cerrar todas las instancias abiertas hacia la base de datos (bd)
+     // Cerrar todas las instancias abiertas hacia la base de datos (bd)
             cstmt.close();
             connMySQL.close(conn);
         conn.close();
@@ -47,7 +44,7 @@ public class ControllerCliente {
     }
 
     public ArrayList<Cliente> mostrarClientes(int idUsuarioIngresado) {
-        String query = "SELECT idUsuario, nombreUsuario, imagenPerfil, ciudad, correo FROM Usuario  WHERE idUsuario = ?";
+        String query = "SELECT * FROM Usuario  WHERE idUsuario = ?";
         try {
             ConnectioDB connMysql = new ConnectioDB();
             Connection conn = connMysql.open();
